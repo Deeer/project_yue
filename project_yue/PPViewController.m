@@ -1,37 +1,30 @@
 //
-//  FirstViewController.m
+//  PPViewController.m
 //  project_yue
 //
-//  Created by Dee on 15/5/22.
+//  Created by Dee on 15/5/27.
 //  Copyright (c) 2015年 zjsruxxxy7. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "PPViewController.h"
 
-@interface FirstViewController ()
-
+@interface PPViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation PPViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=@"约一下";
-
-    
-    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
-    
-
-    self.view.backgroundColor = [UIColor grayColor];
+    self.title  = @"个人计划";
+   
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 /*
 #pragma mark - Navigation
