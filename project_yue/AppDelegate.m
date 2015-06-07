@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "newFeatureViewController.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,8 +20,35 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window =[[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds] ];
-    self.window.rootViewController =[[newFeatureViewController alloc]init];
-    [self.window makeKeyAndVisible];
+    self.window.backgroundColor =[UIColor whiteColor];
+    NSUserDefaults *userDefault =[NSUserDefaults standardUserDefaults];
+    
+    NSString*lastVersion = [userDefault stringForKey:@"lastVersion"];
+
+    NSString *current =[NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
+    
+    if ([current isEqualToString:lastVersion])
+    {
+    
+        UIStoryboard *storyBoard= [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ViewController *controller= [storyBoard instantiateInitialViewController];
+        
+
+        self.window.rootViewController= controller;
+        
+    }else
+    {
+        self.window.rootViewController =[[newFeatureViewController alloc]init];
+       
+        
+        [userDefault setObject:current forKey:@"lastVersion"];
+        [userDefault synchronize];
+        
+
+    }
+    
+    
+       [self.window makeKeyAndVisible];
     
     
     return YES;
