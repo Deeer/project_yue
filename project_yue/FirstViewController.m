@@ -10,6 +10,7 @@
 #import "DetaiViewController.h"
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchAPI.h>
+//#import "MakeDataViewController.h"
 
 #define APIKey @"7af104a836c93503730248a9d476dca9"
 
@@ -93,9 +94,10 @@
     if (_currentLocation ==nil||_search ==nil  ) {
         
         NSLog(@"search failed");
+        [self.view endEditing:YES];
         return;
     }
-    [_searchBar resignFirstResponder];
+    [self.view endEditing:YES];
     AMapPlaceSearchRequest *request =[[AMapPlaceSearchRequest alloc]init];
     request.searchType = AMapSearchType_PlaceAround;
     request.location =[AMapGeoPoint locationWithLatitude:_currentLocation.coordinate.latitude longitude:_currentLocation.coordinate.longitude];
@@ -149,6 +151,7 @@
     [self initSearch];
     [self initControls];
     [self initAttributes];
+    self.title = @"约一下";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -162,10 +165,6 @@
 {
     CLLocation *currentLocation =userLocation.location;
     _currentLocation = [userLocation.location copy];
-//    NSLog(@"%@",currentLocation);
-//    NSLog(@"----");
-    
-    
 }
 
 
@@ -238,11 +237,46 @@
     
     [self presentViewController:detailController animated:YES completion:nil];
     
-    
-    
-    
-    
 }
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    return @"dee";
+//}
+
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 50;
+//}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    
+//    UIButton *btn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+//    btn.backgroundColor =[UIColor redColor];
+//    [btn addTarget:self action:@selector(MakeAData) forControlEvents:UIControlEventTouchUpInside];
+////    UIView *view =[[UIView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+////    view.backgroundColor =[UIColor orangeColor];
+////    
+////    [view addSubview:btn];
+//    
+//    return btn;
+//}
+
+//-(void)MakeAData
+//{
+//    MakeDataViewController *dataViewController =[[MakeDataViewController alloc]init];
+//    
+////    
+////    [self.navigationController pushViewController:dataViewController animated:YES];
+//    dataViewController.modalPresentationStyle =UIModalPresentationFormSheet;
+//    
+//    [self presentViewController:dataViewController animated:YES completion:^{
+//        
+//    }];
+////    NSLog(@"---");
+//    
+//}
+
+
 -(MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
 {
     if ([annotation isKindOfClass:[MAPointAnnotation class]]) {
